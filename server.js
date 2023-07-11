@@ -72,9 +72,9 @@ app.get("/welcome", (req, res) => {
   });
 });
 
-let authRouter = require('./app/routes/api/v1');
+let allRouter = require('./app/routes/api/v1');
 
-app.use('/api/v1', authRouter);
+app.use('/api/v1', allRouter);
 
 // set port, listen for requests
 app.listen(port);

@@ -48,73 +48,73 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, 'Required'],
     },
-    'oCompany': {
-        type: ObjectId,
-        ref: "Company",
-        default: null
-    },
-    'CompanyOwnerId': {
-        type: ObjectId,
-        ref: "User",
-        default: null
-    },
-    'iUserType': {
-        type: Number,
-        required: [true, 'Required']
-    },
-    'vJobTitle': {
-        type: String,
-    },
-    'oUserSettings': userSettings,
-    'iRowsPerPagePreference': {
-        type: Number,
-    },
+    // 'oCompany': {
+    //     type: ObjectId,
+    //     ref: "Company",
+    //     default: null
+    // },
+    // 'CompanyOwnerId': {
+    //     type: ObjectId,
+    //     ref: "User",
+    //     default: null
+    // },
+    // 'iUserType': {
+    //     type: Number,
+    //     required: [true, 'Required']
+    // },
+    // 'vJobTitle': {
+    //     type: String,
+    // },
+    // 'oUserSettings': userSettings,
+    // 'iRowsPerPagePreference': {
+    //     type: Number,
+    // },
     'vAccessToken': {
         type: String,
         required: false,
         default: null
     },
-    'vRefreshToken': {
-        type: String,
-        required: false,
-        default: null
-    },
-    'vVerifyToken': {
-        type: String,
-        required: false,
-        default: null
-    },
-    'vForgetToken': {
-        type: String,
-        required: false,
-        default: null
-    },
-    'iAccessTokenExpires': {
-        type: Number,
-        required: false,
-        default: null
-    },
-    'iRefreshTokenExpires': {
-        type: Number,
-        required: false,
-        default: null
-    },
-    'bIsLinkOpen': {
-        type: Boolean,
-        default: false
-    },
-    'bIsActive': {
-        type: Boolean,
-        default: false
-    },
+    // 'vRefreshToken': {
+    //     type: String,
+    //     required: false,
+    //     default: null
+    // },
+    // 'vVerifyToken': {
+    //     type: String,
+    //     required: false,
+    //     default: null
+    // },
+    // 'vForgetToken': {
+    //     type: String,
+    //     required: false,
+    //     default: null
+    // },
+    // 'iAccessTokenExpires': {
+    //     type: Number,
+    //     required: false,
+    //     default: null
+    // },
+    // 'iRefreshTokenExpires': {
+    //     type: Number,
+    //     required: false,
+    //     default: null
+    // },
+    // 'bIsLinkOpen': {
+    //     type: Boolean,
+    //     default: false
+    // },
+    // 'bIsActive': {
+    //     type: Boolean,
+    //     default: false
+    // },
     'bIsDelete': {
         type: Boolean,
         default: false
     },
-    'ParentId': {
-        type: ObjectId,
-        ref: "User",
-    },
+    // 'ParentId': {
+    //     type: ObjectId,
+    //     ref: "User",
+    // },
     'iCreatedAt': {
         type: Number,
         required: [true, 'Required'],

@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 exports.signup = async (req, res) => {
   try {
     let currentTime = common.getEpoch();
-    let userType = req.iUserType;
+    // let userType = req.iUserType;
 
     let userPayload = new User({
       'vFirstName': req?.body?.vFirstName,
@@ -20,34 +20,35 @@ exports.signup = async (req, res) => {
       'vEmail': req?.body?.vEmail,
       'vPhone': req?.body?.vPhone || "",
       'vPassword': await bcrypt.hash(req?.body?.vPassword, 12),
-      'vJobTitle': req?.body?.vJobTitle || "",
-      'iUserType': req?.body?.iUserType,
-      'ParentId': req?.userId,
-      'iRowsPerPagePreference': req?.body?.iRowsPerPagePreference || 10,
-      'vVerifyToken': null,
-      'bIsLinkOpen': false,
-      'bIsActive':true,
+      // 'vJobTitle': req?.body?.vJobTitle || "",
+      // 'iUserType': req?.body?.iUserType,
+      // 'ParentId': req?.userId,
+      // 'iRowsPerPagePreference': req?.body?.iRowsPerPagePreference || 10,
+      // 'vVerifyToken': null,
+      // 'bIsLinkOpen': false,
+      'bIsActive': true,
       'iCreatedAt': currentTime
     });
-    if (userType === 5 || userType === 6) {
-      userPayload.oCompany = req?.oCompany;
-      userPayload.CompanyOwnerId = req?.CompanyOwnerId;
-    }
-    else {
-      if (req?.body?.iUserType === 5 || req?.body?.iUserType === 6) {
-        userPayload.oCompany = req?.body?.companyId;
-        userPayload.CompanyOwnerId = req?.body?.companyOwnerId;
+    // if (userType === 5 || userType === 6) {
+    //   userPayload.oCompany = req?.oCompany;
+    //   userPayload.CompanyOwnerId = req?.CompanyOwnerId;
+    // }
+    // else {
+    //   if (req?.body?.iUserType === 5 || req?.body?.iUserType === 6) {
+    //     userPayload.oCompany = req?.body?.companyId;
+    //     userPayload.CompanyOwnerId = req?.body?.companyOwnerId;
 
-      } else {
-        userPayload.oCompany = req?.oCompany;
-      }
-    }
+    //   } else {
+    //     userPayload.oCompany = req?.oCompany;
+    //   }
+    // }
     let query = { 'vEmail': req?.body?.vEmail };
 
     //Find if any User have requested Email ID
     await common.findByCaseInsensitive(User, query).exec(async (err, user) => {
       if (err) {
         //If error occurs
+        console.log(err, '>>>>>>err')
         return common.commonErrorResponse(res, err);
       }
       if (user != null) {
@@ -62,13 +63,13 @@ exports.signup = async (req, res) => {
           }
           if (result !== null) {
             //Send Email of  Credential to User 
-            send_email.sendCredential(req.body.vEmail, req.body.vPassword);
+            // send_email.sendCredential(req.body.vEmail, req.body.vPassword);
             //Send Account Activation Link to Email
-            setTimeout(() => {
-              send_email.verifyAccount(req.body.vEmail);
-            }, 15000);
+            // setTimeout(() => {
+            //   send_email.verifyAccount(req.body.vEmail);
+            // }, 15000);
             //Return success response
-            return common.commonSuccessResponse(res, { message: en_TXT.acc_register_success });
+            return common.commonSuccessResponse(res, { message: en_TXT.acc_register_success1 });
           } else {
             //if any error in register
             return common.commonResponse(res, { status: false, code: 400, message: en_TXT.acc_register_fail });
@@ -92,10 +93,10 @@ exports.login = async (req, res) => {
     let query = {
       'vEmail': req.body.vEmail
     };
-    let join = "CompanyOwnerId"
-    let joinOption = "vFirstName bIsActive bIsDelete"
-    let join2 = "oCompany"
-    let joinOption2 = "bIsOverridePrice"
+    let join = ""
+    let joinOption = ""
+    let join2 = ""
+    let joinOption2 = ""
 
     //Determine whether the user exists with the requested email id.
     await common.findByCaseInsensitiveWithJoin(User, query, join, joinOption, join2, joinOption2).exec(async (err, user) => {
@@ -105,53 +106,54 @@ exports.login = async (req, res) => {
       }
       if (user != null) {
         //If the user discovers it, the password should be checked.
+        console.log(user, req.body.vPassword, '>>>>>>>>>req.body.vPassword')
         const checkpass = await bcrypt.compare(req.body.vPassword, user?.vPassword);
         //If password matched
         if (checkpass) {
           //Check to see if the user's temperaory is delted or not.
           if (user?.bIsDelete === false) {
-              let payload = {
-                _id: user?._id,
-                vEmail: user?.vEmail,
-                CompanyOwnerId: user?.CompanyOwnerId?._id
-              };
-              //Generate Access Token
-              const accessToken = common.accessToken(payload);
-              let query = {
-                _id: user?._id
-              };
-              let updatedata = {
-                vAccessToken: accessToken
-              };
-              let filter = {
-                new: true
-              };
-              //Update Token in Database
-              common.updateQuery(User, query, updatedata, filter).exec(async (err, updatedUser) => {
-                if (err) {
-                  // If an error occurs
-                  return common.commonErrorResponse(res, err);
-                }
-                if (updatedUser) {
-                  let logedInUser = {
-                    "_id": updatedUser?._id,
-                    "vFirstName": updatedUser?.vFirstName,
-                    "vLastName": updatedUser?.vLastName,
-                    "vEmail": updatedUser?.vEmail,
-                    "vPhone": updatedUser?.vPhone,
-                    "vJobTitle": updatedUser?.vJobTitle,
-                    "vAccessToken": updatedUser?.vAccessToken,
-                    "CompanyOwnerId": updatedUser?.CompanyOwnerId,
-                    "oCompany": updatedUser?.oCompany,
-                    "oUserSettings": updatedUser?.oUserSettings,
-                    "bIsOverridePrice": user?.oCompany?.bIsOverridePrice,
-                    "iUserRole": updatedUser?.iUserType
-                  };
+            let payload = {
+              _id: user?._id,
+              vEmail: user?.vEmail,
+              // CompanyOwnerId: user?.CompanyOwnerId?._id
+            };
+            //Generate Access Token
+            const accessToken = common.accessToken(payload);
+            let query = {
+              _id: user?._id
+            };
+            let updatedata = {
+              vAccessToken: accessToken
+            };
+            let filter = {
+              new: true
+            };
+            //Update Token in Database
+            common.updateQuery(User, query, updatedata, filter).exec(async (err, updatedUser) => {
+              if (err) {
+                // If an error occurs
+                return common.commonErrorResponse(res, err);
+              }
+              if (updatedUser) {
+                let logedInUser = {
+                  "_id": updatedUser?._id,
+                  // "vFirstName": updatedUser?.vFirstName,
+                  // "vLastName": updatedUser?.vLastName,
+                  "vEmail": updatedUser?.vEmail,
+                  "vPhone": updatedUser?.vPhone,
+                  // "vJobTitle": updatedUser?.vJobTitle,
+                  "vAccessToken": updatedUser?.vAccessToken,
+                  // "CompanyOwnerId": updatedUser?.CompanyOwnerId,
+                  // "oCompany": updatedUser?.oCompany,
+                  // "oUserSettings": updatedUser?.oUserSettings,
+                  // "bIsOverridePrice": user?.oCompany?.bIsOverridePrice,
+                  // "iUserRole": updatedUser?.iUserType
+                };
 
-                  //Return success Response
-                  return common.commonSuccessResponse(res, { message: en_TXT.acc_login_succss, user: logedInUser });
-                }
-              });
+                //Return success Response
+                return common.commonSuccessResponse(res, { message: en_TXT.acc_login_succss, user: logedInUser });
+              }
+            });
           }
           else {
             //If User temparory Deleted.
@@ -169,7 +171,7 @@ exports.login = async (req, res) => {
     });
   }
   catch (err) {
-    common.printLog(err, "Error in user login api");
+    // common.printLog(err, "Error in user login api");
     //If any exception occurs
     return common.commonErrorResponse(res, err);
   }
@@ -307,3 +309,14 @@ exports.resetPassword = async (req, res) => {
     return common.commonErrorResponse(res, err);
   }
 };
+
+exports.userList = async (req, res) => {
+  try {
+    let users =await User.find({})
+    console.log(users, '>>>>>>>.users')
+    return res.status(200).send({ data: users })
+  } catch (error) {
+    console.log(error, "userlist error");
+    return res.status(200).send({ message: "Internal server error" })
+  }
+}
