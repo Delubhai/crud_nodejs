@@ -1,0 +1,52 @@
+//Common Response Message
+module.exports = {
+  "status_success": true,
+  "status_failed": false,
+  // Common Related
+  "msg_success": "Success!",
+  "msg_fail": "Oops! Something went wrong.",
+
+  // User Related
+  "acc_login_succss": "You have successfully logged in!",
+  "acc_login_fail": "Invalid credentials, please verify and retry",
+  "acc_alerady_exits": "The account you've chosen already exists.",
+  "acc_register_success": "Thanks for signing up.We have sent an email with login credentials to the requested email address.",
+  "acc_register_fail": "Your account has not been activated yet.",
+  "acc_forgot_success": "We've sent a reset Password link to ",
+  "acc_forgot_failed": "Sorry! email does not exists.",
+  "acc_activate_link_send": "Please activate your account.",
+  "acc_reset_success": "You've successfully changed your password.",
+  "acc_reset_fail": "Your password could not be changed. Try again",
+  "acc_verify_success": "Your account has been verified successfully.",
+  "acc_verify_fail": "Verification Failed, Please try again.",
+  "acc_not_exists": "Could not find requested account.",
+  "acc_invalid_email": "We've sent verification link to your email address.",
+  "acc_exists": "Account already exists. Please try with another one",
+  "acc_link_aleready": "The account has already been activated.",
+  "acc_pass_update": "Your password has been changed!",
+  "acc_logout": "Logging out, please wait..",
+  "acc_change_pass_success": "You've successfully changed your password.",
+  "acc_change_pass_fail": "Your password could not be changed. Try again",
+  "acc_pass_not_match": "Sorry! You have entered an incorrect old password.",
+  "acc_unable_login": "Unable to login! Please contact administrator.",
+  "acc_unable_delete": "Unable to perform!!",
+  "acc_user_email_exists": "Requested email of user already exits! try another one.",
+
+  "acc_user_unauthorized": "Unauthorized access!",
+  "acc_user_get_success": "Thank you. User data has been received.",
+  "acc_user_get_failed": "Failed to receieve data of user.",
+  "acc_update_success": "You have successfully updated your profile.",
+  "acc_update_failed": "Failed to update your profile. Please try again.",
+
+  "acc_user_update_unauthorized": "We are sorry, your account does not have access.",
+  "acc_user_delete_unauthorized": "We are sorry, your account does not have access.",
+  "acc_delete_success": "User has been removed temporary successfully.",
+  "acc_delete_permanent_success": "User has been removed permanent successfully.",
+  "acc_delete_fail": "Sorry,Failed to removed User. Please try again.",
+  "acc_retrieve_success": "User has been retrieve successfully.",
+  "acc_retrieve_fail": "User has not been retrieve.",
+  "acc_user_retrieve_fail": "unable to retrieve the user. Please first retrieve the user associated agent company.",
+  "agent_alerady_exits": "Agent already exists. Please try with another one",
+  "acc_promote_success": "Agent Admin promote successfully",
+  "acc_promote_failed": "Failed to promote Main Agent Admin"
+};
