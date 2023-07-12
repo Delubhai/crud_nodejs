@@ -14,7 +14,7 @@ const common = require('./config/common');
 
 //Cors Policy
 let corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "*"
 };
 
 app.use(cors(corsOptions));
