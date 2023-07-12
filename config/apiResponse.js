@@ -11,6 +11,7 @@ module.exports = {
   "acc_login_fail": "Invalid credentials, please verify and retry",
   "acc_alerady_exits": "The account you've chosen already exists.",
   "acc_register_success": "Thanks for signing up.We have sent an email with login credentials to the requested email address.",
+  "acc_register_success1": "Thanks for signing up.Login to continue.",
   "acc_register_fail": "Your account has not been activated yet.",
   "acc_forgot_success": "We've sent a reset Password link to ",
   "acc_forgot_failed": "Sorry! email does not exists.",
@@ -48,5 +49,16 @@ module.exports = {
   "acc_user_retrieve_fail": "unable to retrieve the user. Please first retrieve the user associated agent company.",
   "agent_alerady_exits": "Agent already exists. Please try with another one",
   "acc_promote_success": "Agent Admin promote successfully",
-  "acc_promote_failed": "Failed to promote Main Agent Admin"
+  "acc_promote_failed": "Failed to promote Main Agent Admin",
+
+  'todo_delete': 'Task Deleted Successfully.',
+  'todo_mark_completed': 'Task Marked as Completed',
+  'todo_update': 'Task Updated Successfully',
+  'todo_create': 'Task Created Successfully',
+
+  'todo_delete_failed': 'Failed to delete task.',
+  'todo_mark_completed_failed': 'Failed to mark completed',
+  'todo_update_failed': 'Failed to update task',
+  'todo_create_failed': 'Failed to create task',
+
 };

@@ -6,7 +6,7 @@ const {
 const uuid4 = require('uuid4');
 const crypto = require('crypto');
 const User = require('../app/models/user.model');
-const Role = require('../app/models/role.model');
+// const Role = require('../app/models/role.model');
 const _ = require("lodash");
 const en_TXT = require('./apiResponse');
 const {
