@@ -61,7 +61,7 @@ exports.updateTodo = async (req, res) => {
       $set: {
         vTitle: req.body.vTitle,
         vDescription: req.body.vDescription,
-        iDueDate: req.body.iDueDate,
+        iDueDate: new Date(req.body.iDueDate) / 1000,
         iUpdatedAt: currentTime
       }
     })
